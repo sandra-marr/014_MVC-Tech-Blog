@@ -34,7 +34,7 @@ router.post('/:id', withAuth, async (req, res) => {
 });
 
 // view a post by the post id and join with comment model and user model
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, { 
       include: [ 
