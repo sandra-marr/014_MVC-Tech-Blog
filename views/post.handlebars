@@ -1,19 +1,24 @@
-<div class="text-center">
-  <div style="border: 2px solid black;">
-  <h2>{{posts.post_title}}</h2>
-  <p>{{posts.post_body}}</p>
-  <p>Created by {{posts.user.user_name}} on {{posts.post_date}}</p>
-  <div>
-    {{#each posts.comments as |comment| }}
-      <div class="comment-list">
+<div>
+  <div class="border">
+    <h2 class="post text-center">{{posts.post_title}}</h2>
+    <p>{{posts.post_body}}</p>
+    <p class="text-right side-note">Created by {{posts.user.user_name}} on {{posts.post_date}}</p>
+  </div>
+  <div class="comment-list border">
     <h3>Comments:</h3>
-    <div>
-      <h4>{{post.user.user_name}}</h4>
-      <p>{{comment.comment_body}}</p>
-      <p>{{format_date comment.comment_date}}</p>
+     {{#each comments as |comment| }}
+    <div class="display-flex justify-space-between">
+      <div>
+        <p>{{comment.comment_body}}</p>
+      </div>
+      <div>
+        {{comment.user_name}}{{comment.comment_date}}</p>
+      </div>
     </div>
-    </div>
-    {{/each}}
+    {{#if current_user}}
+    <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+    {{/if}}
+     {{/each}}  
   </div>
   </div>
     <form class="form commentForm">

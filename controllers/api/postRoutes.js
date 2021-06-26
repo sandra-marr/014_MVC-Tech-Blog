@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const session = require('express-session');
 const { Post, Comment, User} = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -35,29 +36,39 @@ router.post('/:id', withAuth, async (req, res) => {
 
 // view a post by the post id and join with comment model and user model
 router.get('/:id', withAuth, async (req, res) => {
+
+  req.session.loggedIn = true;
+
   try {
     const postData = await Post.findByPk(req.params.id, { 
       include: [ 
         { 
           model: Comment,
           attributes: [
-            'id',
             'comment_body',
-            'user_id',
             'comment_date',
             'post_id',
           ]},
         {
           model: User,
-          attributes: ['user_name'],
+          attributes: [
+            'id',
+            'user_name',
+          ],
         },
       ],
     });
 
-
     const posts = postData.get({ plain: true });
     
-    res.render('post', { posts });
+    ////Try to create something similar to the product tags in hw 13 so that you can access the users who created the comments.
+
+    res.render('post', { posts,
+      logged_in: req.session.logged_in,
+    });
+
+    // res.render('comments', { comments });
+   
   } catch (err) {
     res.status(500).json(err);
   };
