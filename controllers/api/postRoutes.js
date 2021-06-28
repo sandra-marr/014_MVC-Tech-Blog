@@ -33,7 +33,7 @@ router.post('/:id', withAuth, async (req, res) => {
 });
 
 // view a post by the post id and join with comment model and user model
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
 
   req.session.loggedIn = true;
 

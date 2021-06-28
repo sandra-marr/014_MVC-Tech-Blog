@@ -1,11 +1,23 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Dashboard for {{user_name}}. Create, update or delete posts here.</h2>
-  </div>
+<div class=" text-center display-flex flex-column justify-center">
+    <h2>~ Dashboard for {{user_name}} ~</h2>
+    <h4>Create, Update, or Delete Posts Here:</h4>
 </div>
 
 <div class="row mt-4">
-  <div class="col-md-6">
+    {{#if posts.length}}
+  <div class="col-md-12 post-list border">
+    <h3>Current Posts:</h3>
+    {{#each posts as |post|}}
+    <div class="row mb-2 post-list">
+      <div class="col-md-8">
+        <h4><a href="/api/edit/{{post.id}}">{{post.post_title}}</a></h4>
+        
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+  <div class="col-md-12 border mt-3">
     <h3>Create a New Post:</h3>
 
     <form class="form new-post-form">
@@ -23,18 +35,5 @@
     </form>
   </div>
 
-  {{#if posts.length}}
-  <div class="col-md-6 post-list">
-    <h3>Current Posts:</h3>
 
-    {{#each posts as |post|}}
-    <div class="row mb-2 post-list">
-      <div class="col-md-8">
-        <h4><a href="/api/edit/{{post.id}}">{{post.post_title}}</a></h4>
-        
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{/if}}
 </div>
