@@ -27,3 +27,17 @@ header, .post {
 .side-note {
   font-size: small;
 }
+
+.comment:nth-child(even) {
+  background-color: rgb(156, 196, 206);
+  padding: .1em;
+  border-radius: .25em;
+
+}
+
+.comment:nth-child(odd) {
+  padding: .1em;
+  border-radius: .25em;
+  border: thin solid rgb(156, 196, 206);
+
+}

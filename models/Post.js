@@ -20,7 +20,7 @@ Post.init(
       allowNull: false,
     },
     post_date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },

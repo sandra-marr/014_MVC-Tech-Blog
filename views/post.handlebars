@@ -1,33 +1,30 @@
 <div>
   <div class="border">
-    <h2 class="post text-center">{{posts.post_title}}</h2>
+    <h2 class="post text-center postId" data-id="{{posts.id}}">{{posts.post_title}}</h2>
     <p>{{posts.post_body}}</p>
-    <p class="text-right side-note">Created by {{posts.user.user_name}} on {{posts.post_date}}</p>
+    <p class="text-right side-note">Created by {{posts.user.user_name}} on {{format_date posts.post_date}}</p>
   </div>
-  <div class="comment-list border">
-    <h3>Comments:</h3>
-     {{#each comments as |comment| }}
-    <div class="display-flex justify-space-between">
-      <div>
-        <p>{{comment.comment_body}}</p>
-      </div>
-      <div>
-        {{comment.user_name}}{{comment.comment_date}}</p>
-      </div>
+  <div class="comment-list border mt-3">
+    <h3 class="post sessUserId" data-id="{{sessUserId}}">Comments:</h3>
+     {{#each posts.comments as |comment| }}
+    <div class="comment">  
+      <p>{{comment.comment_body}}</p>
+      <div class="side-note text-right">
+        ~<span class="userId" data-id="{{comment.user.id}}">{{comment.user.user_name}}</span> on {{format_date comment.comment_date}}
+     </div>
+     <button type="submit" class="btn btn-primary delete-btn" data-id="{{comment.id}},{{comment.user.id}}">Delete</button>
     </div>
-    {{#if current_user}}
-    <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
-    {{/if}}
      {{/each}}  
   </div>
-  </div>
-    <form class="form commentForm">
-      <div class="form-group">
-        <label for="comment_body">Comment:</label>
-        <textarea class="form-input" id="comment_body" name="comment_body"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
+  <form class="form commentForm">
+    <div class="form-group">
+      <label for="comment_body">Comment:</label>
+      <textarea class="form-input" id="comment_body" name="comment_body"></textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
 </div>
+
+<script src="/js/comment.js"></script>
