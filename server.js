@@ -35,10 +35,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
+app.listen(PORT, () => {console.log('Now listening')
+sequelize.sync({ force: false })
+})
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
-});
+// sequelize.sync({ force: false }).then(() => {
+//   app.listen(PORT, () => console.log('Now listening'));
+// });
 
 // .catch( (err)=> {
 //   console.log("Could not connect to the server.")
